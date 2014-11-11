@@ -4,16 +4,16 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('endevr', ['ionic', 'AppCtrl', 'AuthCtrl', 'BrowseCtrl', 'MatchesCtrl', 'EmployerCtrl', 'CardsCtrl', 'CardCtrl', 'LoginCtrl', 'GitHubService', 'LinkedInService', 'ionic.contrib.ui.tinderCards', 'ngCordova'])
+angular.module('endevr', ['ionic', 'AppCtrl', 'AuthCtrl', 'BrowseCtrl', 'MatchesCtrl', 'EmployerCtrl', 'CardsCtrl', 'CardCtrl', 'LoginCtrl', 'GitHubService', 'LinkedInService', 'ionic.contrib.ui.tinderCards', 'ngCordova', 'ionic.utils'])
 
-.run(function($ionicPlatform, $cordovaSplashscreen) {
+.run(function($ionicPlatform, $cordovaSplashscreen, $localstorage) {
   // Holds splash screen a set amount of time
   // before revealing default screen, browser.
   // Should eventually be set to a ready event.
   $ionicPlatform.ready(function() {
     setTimeout(function() {
       $cordovaSplashscreen.hide();
-    }, 3000);
+    }, 1000);
 
     // Hide the accessory bar by default 
     // (remove this to show the accessory bar above the keyboard for form inputs)
@@ -28,6 +28,7 @@ angular.module('endevr', ['ionic', 'AppCtrl', 'AuthCtrl', 'BrowseCtrl', 'Matches
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+
   $stateProvider
 
     .state('app', {
@@ -46,6 +47,17 @@ angular.module('endevr', ['ionic', 'AppCtrl', 'AuthCtrl', 'BrowseCtrl', 'Matches
         }
       }
     })
+
+    .state('app.auth', {
+      url: '/auth',
+      views: {
+        'menuContent' :{
+          templateUrl: 'templates/auth.html',
+          controller: 'AuthCtrl'
+        }
+      }
+    })
+
     .state('app.matches', {
       url: '/matches',
       views: {
