@@ -1,6 +1,6 @@
-angular.module('LinkedInService', ['LocalStorageModule', 'ionic'])
+angular.module('LinkedInService', ['ionic.utils', 'ionic'])
 
-.factory('LinkedInService', function($location, localStorageService) {
+.factory('LinkedInService', function($location, $localstorage) {
   // url matches the server route that uses passport
   var url = 'http://localhost:9000/auth/linkedin';
   var token, hasToken, userId, hasUserId;
@@ -15,9 +15,9 @@ angular.module('LinkedInService', ['LocalStorageModule', 'ionic'])
         if (hasToken > -1 && hasUserId > -1) {
           token = event.url.match('oauth_token=(.*)&userId')[1];
           userId = event.url.match('&userId=(.*)')[1];
-          localStorageService.set('linkedin-token', token);
-          localStorageService.set('token-date', JSON.stringify(new Date()));
-          localStorageService.set('userId', userId);
+          $localstorage.set('linkedin-token', token);
+          $localstorage.set('token-date', JSON.stringify(new Date()));
+          $localstorage.set('userId', userId);
           loginWindow.close();
           location.href = location.pathname;
         }

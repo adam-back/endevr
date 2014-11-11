@@ -1,6 +1,6 @@
-angular.module('GitHubService', ['LocalStorageModule', 'ionic'])
+angular.module('GitHubService', ['ionic.utils', 'ionic'])
 
-.factory('GitHubService', function($location, localStorageService) {
+.factory('GitHubService', function($location, $localstorage) {
 
   // url matches the server route that uses passport
   var url = 'http://localhost:9000/auth/github';
@@ -17,9 +17,9 @@ angular.module('GitHubService', ['LocalStorageModule', 'ionic'])
         if (hasToken > -1 && hasUserId > -1) {
           token = event.url.match('oauth_token=(.*)&userId')[1];
           userId = event.url.match('&userId=(.*)')[1];
-          localStorageService.set('github-token', token);
-          localStorageService.set('token-date', JSON.stringify(new Date()));
-          localStorageService.set('userId', userId);
+          $localstorage.set('github-token', token);
+          $localstorage.set('token-date', JSON.stringify(new Date()));
+          $localstorage.set('userId', userId);
           loginWindow.close();
           location.href = location.pathname;
         }

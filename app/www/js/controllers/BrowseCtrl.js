@@ -4,6 +4,13 @@ angular.module('BrowseCtrl', ['ionic.contrib.ui.tinderCards', 'LocalStorageModul
 // Currently hardcoded for 'Browse Employers'
 // but should be variable for 'Browse Candidates'
 // in the future.
-.controller('BrowseCtrl', function($scope) {
+.controller('BrowseCtrl', function($scope, $rootScope, $location) {
   $scope.userType = 'Employers';
+  if($rootScope.LinkedInAuthenticated == true) {
+    $location.path('/app/matches');
+  }
+  // if ($rootScope.LinkedInAuthenticated == true && $rootScope.GitHubAuthenticated == true) {
+  //   alert('into matches!');
+  //   $location.path('/app/matches');
+  // }
 });
